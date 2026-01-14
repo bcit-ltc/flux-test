@@ -1,0 +1,35 @@
+# Retrieves and transforms a secret from Vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: github-private-repo-token
+spec:
+  type: kv-v2
+  vaultAuthRef: vault-auth
+  mount: ltc-infrastructure
+  path: github/gh-private-oci-token
+  refreshAfter: 24h
+  destination:
+    name: github-private-repo-token
+    create: true
+    overwrite: true
+    type: kubernetes.io/dockerconfigjson
+    transformation:
+      excludeRaw: true
+      excludes:
+        - ".*"
+      templates:
+        ".dockerconfigjson":
+          text: |
+            {{- $server := "ghcr.io" -}}
+            {{- $user := "ghcr-user" -}}
+            {{- $email := "noreply@example.com" -}}
+            {{- $token := .Secrets.GITHUB_TOKEN -}}
+            {{- $auth := printf "%s:%s" $user $token | b64enc -}}
+            {{- dict "auths" (dict $server (dict
+                  "username" $user
+                  "password" $token
+                  "email"    $email
+                  "auth"     $auth)) | mustToJson -}}
+

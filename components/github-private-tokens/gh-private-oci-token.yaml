@@ -1,0 +1,15 @@
+# Retrieves a secret from Vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: gh-private-oci-token
+spec:
+  type: kv-v2
+  vaultAuthRef: vault-auth
+  refreshAfter: 24h
+  mount: ltc-infrastructure
+  path: github/gh-private-oci-token
+  destination:
+    name: gh-private-oci-token
+    create: true

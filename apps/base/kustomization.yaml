@@ -1,0 +1,13 @@
+# Base kustomization for all app workloads
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - helm-release.yaml
+  - oci-repository.yaml
+  - ingress-latest.yaml
+  - ingress-stable.yaml
+
+# Teach kustomize how to update generated names
+configurations:
+  - kustomizeconfig.yaml
