@@ -8,5 +8,5 @@ kind: Kustomization
 commonAnnotations:
   config.fluxcd.io/workload-type: infrastructure
 
-# resources:
-#   - ./infrastructure-documentation
+resources:
+  - ./vault-secrets-operator/controller
