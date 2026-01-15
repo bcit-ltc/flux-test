@@ -2,7 +2,7 @@
 apiVersion: source.extensions.fluxcd.io/v1beta1
 kind: ArtifactGenerator
 metadata:
-  name: flux-system
+  name: web-artifacts
   namespace: flux-system
 spec:
   sources:
@@ -10,10 +10,10 @@ spec:
       kind: GitRepository
       name: flux-system
   artifacts:
-    - name: infrastructure
+    - name: web-infrastructure
       originRevision: "@monorepo"
       copy:
-        - from: "@monorepo/infrastructure/**"
+        - from: "@monorepo/"
           to: "@artifact/"
     # - name: apps
     #   originRevision: "@monorepo"
@@ -22,3 +22,15 @@ spec:
     #       to: "@artifact/base/"
     #     - from: "@monorepo/apps/staging/**"
     #       to: "@artifact/staging/"
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: web-infrastructure
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: ExternalArtifact
+    name: web-infrastructure
+  path: "./clusters/cluster04/web"
+  prune: true

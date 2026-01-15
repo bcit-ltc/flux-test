@@ -8,10 +8,5 @@ kind: Kustomization
 commonAnnotations:
   config.fluxcd.io/workload-type: infrastructure
 
-resources:
-
-  # # vault secrets operator requires init; see `infrastructure/vault-secrets-operator/NOTES.md`
-  - ./vault-secrets-operator
-
-  # Tailscale
-  - ./tailscale
+# resources:
+#   - ./infrastructure-documentation
