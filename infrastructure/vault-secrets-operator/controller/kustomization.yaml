@@ -9,7 +9,7 @@ resources:
   - namespace.yaml
 
 # Replace base Namespace name and add all resources to this namespace
-namespace: vault-secrets-operator-system
+# namespace: vault-secrets-operator-system
 
 # Generate a re-usable name variable for other resources
 configMapGenerator:

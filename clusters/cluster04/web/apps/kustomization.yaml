@@ -5,7 +5,7 @@ kind: Kustomization
 
 resources:
   # - ../../../apps
-  - ../../../infrastructure
+  - ../../../../infrastructure
   # - vault-secrets-operator.yaml
 
 # Add this to all resources
