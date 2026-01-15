@@ -34,5 +34,5 @@ spec:
   sourceRef:
     kind: ExternalArtifact
     name: web-infrastructure
-  path: "./clusters/cluster04/web"
+  path: "./clusters/cluster04/web/apps"
   prune: true
